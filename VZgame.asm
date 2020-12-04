@@ -5,17 +5,36 @@ start:
 	;CALL 01C9h	;clear screen
 	call hires
 	ld hl,07000h
-	call drawTile
+	;call drawTile
 	ld hl,07004h
-	call drawTile
+	;call drawTile
 	ld hl,07008h
-	call drawTile
+	call drawTile1
 	;ld hl,07250h
 	;call undrawTile
 	ld hl,07000h
 	call undrawTile
+	call drawBottom
 	call readkey
 	CALL 01C9h	;clear screen
+	ret
+	
+drawBottom:
+	ld b,7
+	
+	ld hl, bottom
+	ld de, 077ffh
+db_loop1:
+	ld c,32
+db_loop:
+	ld a,(hl)
+	ld (de), a
+	dec de
+	inc hl
+	dec c
+	jp nz, db_loop
+	dec b
+	jp nz, db_loop1
 	ret
 	
 	
@@ -24,22 +43,43 @@ undrawTile:
 	ld b,12
 	;ld de, tile1
 	;ld hl, tileStart ;07000h
-tileLoop1:
+tileLoop_1:
 	ld a,0
 	ld (hl),a
 	inc hl
 	;inc de
 	dec c
-	jp nz, tileLoop1
+	jp nz, tileLoop_1
 	;push de
 	ld de, 28
 	add hl, de
 	;pop de
 	ld c,4
 	dec b
-	jp nz, tileLoop1
+	jp nz, tileLoop_1
 	ret
-	
+
+
+drawTile1:
+	ld c,4
+	ld b,12
+	ld de, tile2
+	;ld hl, tileStart ;07000h
+tileLoop1:
+	ld a,(de)
+	ld (hl),a
+	inc hl
+	inc de
+	dec c
+	jp nz, tileLoop1
+	push de
+	ld de, 28
+	add hl, de
+	pop de
+	ld c,4
+	dec b
+	jp nz, tileLoop1
+	ret	
 	
 drawTile:
 	ld c,4
@@ -95,6 +135,7 @@ erase:
 	ld hl,07250h
 	call undrawTile
 	jp scan
+	
 tile1 	.byte 0,0,0,0
 	    .byte 12,255,255,255
 		.byte 51,255,255,255
@@ -107,6 +148,39 @@ tile1 	.byte 0,0,0,0
 		.byte 255,255,255,255
 		.byte 255,255,255,255
 		.byte 255,255,255,255
+	
+tile2 	.byte 255,255,255,255
+	    .byte 255,255,255,255
+		.byte 255,255,255,255
+		.byte 255,255,255,255
+		.byte 255,255,255,255
+		.byte 255,255,255,255
+		.byte 255,255,255,255
+		.byte 255,255,255,255
+		.byte 255,255,255,255
+		.byte 255,255,255,255
+		.byte 255,255,255,255
+		.byte 255,255,255,255
+		
+		
+bottom	.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
+		
 
 tileStart:
 		.byte 2
