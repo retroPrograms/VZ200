@@ -7,7 +7,7 @@ start:
 	ld hl,07000h
 	;call drawTile
 	ld hl,07004h
-	;call drawTile
+	call drawTile
 	ld hl,07008h
 	call drawTile1
 	;ld hl,07250h
@@ -136,9 +136,9 @@ erase:
 	call undrawTile
 	jp scan
 	
-tile1 	.byte 0,0,0,0
-	    .byte 12,255,255,255
-		.byte 51,255,255,255
+tile1 	.byte 255,255,255,255
+	    .byte 255,255,255,255
+		.byte 255,255,255,255
 		.byte 255,255,255,255
 		.byte 255,255,255,255
 		.byte 255,255,255,255
