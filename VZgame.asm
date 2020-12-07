@@ -136,9 +136,9 @@ erase:
 	call undrawTile
 	jp scan
 	
-tile1 	.byte 255,255,255,255
-	    .byte 255,255,255,255
-		.byte 255,255,255,255
+tile1 	.byte 0,0,0,0
+	    .byte 20,0,0,84
+		.byte 1,64,20,0
 		.byte 255,255,255,255
 		.byte 255,255,255,255
 		.byte 255,255,255,255
