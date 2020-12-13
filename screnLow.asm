@@ -28,6 +28,8 @@ scan:  ;registers af, bc, de and hl
 
 	jp scan
 	
+screenText .equ 07000h ;$71ff end
+	
 tile1 	.byte 255,255,255,255
 	    .byte 245,95,255,255
 		.byte 223,247,255,255
