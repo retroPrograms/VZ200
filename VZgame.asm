@@ -7,7 +7,7 @@ start:
 	ld hl,07000h
 	;call drawTile
 	ld hl,07004h
-	call drawTile
+	;call drawTile
 	ld hl,07008h
 	call drawTile1
 	;ld hl,07250h
@@ -62,8 +62,8 @@ tileLoop_1:
 
 drawTile1:
 	ld c,4
-	ld b,12
-	ld de, tile2
+	ld b,16
+	ld de, tile3
 	;ld hl, tileStart ;07000h
 tileLoop1:
 	ld a,(de)
@@ -161,6 +161,23 @@ tile2 	.byte 0,0,0,0
 		.byte 255,255,255,255
 		.byte 255,255,255,255
 		.byte 255,255,255,255
+		
+tile3 	.byte 0,0,0,0
+	    .byte 0,15,192,0
+		.byte 0,253,112,0
+		.byte 3,171,92,0  
+		.byte 14,170,255,0 
+		.byte 14,170,214,192  
+		.byte 50,170,190,192 
+		.byte 50,0,40,192 
+		.byte 50,3,204,192 
+		.byte 14,3,204,192 
+		.byte 14,0,0,192  
+		.byte 14,15,243,192 
+		.byte 3,0,12,0
+		.byte 0,255,240,0
+		.byte 0,0,0,0
+		.byte 0,0,0,0
 		
 		
 bottom	.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
