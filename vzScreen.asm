@@ -11,13 +11,13 @@ start:
 	CALL 01C9h	;clear screen
 	ret
 	
-drawScreen:
+drawScreen:  ;07000h - 077ffh
 	ld b,7
 	
-	ld hl, screen
+	ld hl, pic
 	ld de, 077ffh
 db_loop1:
-	ld c,32
+	ld c,255
 db_loop:
 	ld a,(hl)
 	ld (de), a
