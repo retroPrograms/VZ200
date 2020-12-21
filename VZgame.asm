@@ -9,7 +9,8 @@ start:
 	ld hl,07004h
 	;call drawTile
 	ld hl,07008h
-	call drawTile1
+	;call drawTile1
+	call drawMount
 	;ld hl,07250h
 	;call undrawTile
 	ld hl,07000h
@@ -17,6 +18,26 @@ start:
 	call drawBottom
 	call readkey
 	CALL 01C9h	;clear screen
+	ret
+	
+drawMount:
+	ld hl, mountain
+	ld de, 07000h
+	ld c,8
+mount_loop:
+	ld a, (hl)
+	ld (de), a
+	inc hl
+	inc de
+	ld a, (hl)
+	ld (de), a
+	push hl
+	ld hl,32
+	add hl, de
+	ex de, hl
+	pop hl
+	dec c
+	jp nz, mount_loop
 	ret
 	
 drawBottom:
@@ -84,7 +105,7 @@ tileLoop1:
 drawTile:
 	ld c,4
 	ld b,12
-	ld de, tile1
+	ld de, mountain
 	;ld hl, tileStart ;07000h
 tileLoop:
 	ld a,(de)
@@ -136,18 +157,12 @@ erase:
 	call undrawTile
 	jp scan
 	
-tile1 	.byte 0,0,0,0
-	    .byte 20,0,0,84
-		.byte 1,64,20,0
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		.byte 255,255,255,255
+mountain:
+		.byte 48,0,252,192
+	    .byte 3,240,15,252
+		.byte 51,255,252,0
+		.byte 63,12,0,63
+		
 	
 tile2 	.byte 0,0,0,0
 	    .byte 60,0,0,252
