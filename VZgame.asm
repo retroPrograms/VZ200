@@ -14,8 +14,8 @@ start:
 	;ld hl,07250h
 	;call undrawTile
 	ld hl,07000h
-	call undrawTile
-	call drawBottom
+	;call undrawTile
+	;call drawBottom
 	call readkey
 	CALL 01C9h	;clear screen
 	ret
@@ -27,12 +27,15 @@ drawMount:
 mount_loop:
 	ld a, (hl)
 	ld (de), a
+	
 	inc hl
 	inc de
 	ld a, (hl)
 	ld (de), a
+	inc hl
+	inc de
 	push hl
-	ld hl,32
+	ld hl,30
 	add hl, de
 	ex de, hl
 	pop hl
@@ -162,6 +165,12 @@ mountain:
 	    .byte 3,240,15,252
 		.byte 51,255,252,0
 		.byte 63,12,0,63
+		
+mountain1:
+		.byte 255,255,255,255
+		.byte 255,255,255,255
+		.byte 255,255,255,255
+		.byte 255,255,255,255
 		
 	
 tile2 	.byte 0,0,0,0
