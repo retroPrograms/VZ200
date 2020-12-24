@@ -10,6 +10,11 @@ start:
 	;call drawTile
 	ld hl,07008h
 	;call drawTile1
+	ld de, 07010h
+	call drawMount
+	ld de, 07125h
+	call drawMount
+	ld de, 07260h
 	call drawMount
 	;ld hl,07250h
 	;call undrawTile
@@ -20,9 +25,9 @@ start:
 	CALL 01C9h	;clear screen
 	ret
 	
-drawMount:
+drawMount: ;07000h - 077ffh
 	ld hl, mountain
-	ld de, 07000h
+	;ld de, 07000h
 	ld c,8
 mount_loop:
 	ld a, (hl)
