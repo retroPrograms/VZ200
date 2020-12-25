@@ -4,23 +4,13 @@
 start:
 	;CALL 01C9h	;clear screen
 	call hires
-	ld hl,07000h
-	;call drawTile
-	ld hl,07004h
-	;call drawTile
-	ld hl,07008h
-	;call drawTile1
-	ld de, 07010h
+	ld de, 07008h
 	call drawMount
 	ld de, 07125h
 	call drawMount
 	ld de, 07260h
 	call drawMount
-	;ld hl,07250h
-	;call undrawTile
-	ld hl,07000h
-	;call undrawTile
-	;call drawBottom
+	
 	call readkey
 	CALL 01C9h	;clear screen
 	ret
@@ -48,93 +38,8 @@ mount_loop:
 	jp nz, mount_loop
 	ret
 	
-drawBottom:
-	ld b,7
-	
-	ld hl, bottom
-	ld de, 077ffh
-db_loop1:
-	ld c,32
-db_loop:
-	ld a,(hl)
-	ld (de), a
-	dec de
-	inc hl
-	dec c
-	jp nz, db_loop
-	dec b
-	jp nz, db_loop1
-	ret
-	
-	
-undrawTile:
-	ld c,4
-	ld b,12
-	;ld de, tile1
-	;ld hl, tileStart ;07000h
-tileLoop_1:
-	ld a,0
-	ld (hl),a
-	inc hl
-	;inc de
-	dec c
-	jp nz, tileLoop_1
-	;push de
-	ld de, 28
-	add hl, de
-	;pop de
-	ld c,4
-	dec b
-	jp nz, tileLoop_1
-	ret
 
 
-drawTile1:
-	ld c,4
-	ld b,16
-	ld de, tile3
-	;ld hl, tileStart ;07000h
-tileLoop1:
-	ld a,(de)
-	ld (hl),a
-	inc hl
-	inc de
-	dec c
-	jp nz, tileLoop1
-	push de
-	ld de, 28
-	add hl, de
-	pop de
-	ld c,4
-	dec b
-	jp nz, tileLoop1
-	ret	
-	
-drawTile:
-	ld c,4
-	ld b,12
-	ld de, mountain
-	;ld hl, tileStart ;07000h
-tileLoop:
-	ld a,(de)
-	ld (hl),a
-	inc hl
-	inc de
-	dec c
-	jp nz, tileLoop
-	push de
-	ld de, 28
-	add hl, de
-	pop de
-	ld c,4
-	dec b
-	jp nz, tileLoop
-	ret
-
-		
-
-
-	
 hires:
 		ld hl, 06800h
 		ld a,8
@@ -162,7 +67,7 @@ scan:  ;registers af, bc, de and hl
 	ret
 erase:
 	ld hl,07250h
-	call undrawTile
+	
 	jp scan
 	
 mountain:
@@ -170,71 +75,5 @@ mountain:
 	    .byte 3,240,15,252
 		.byte 51,255,252,0
 		.byte 63,12,0,63
-		
-mountain1:
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		
-	
-tile2 	.byte 0,0,0,0
-	    .byte 60,0,0,252
-		.byte 3,192,60,0
-		.byte 0,48,192,0
-		.byte 0,15,0,0
-		.byte 3,255,255,192
-		.byte 15,240,192,240
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		.byte 255,255,255,255
-		
-tile3 	.byte 0,0,0,0
-	    .byte 0,15,192,0
-		.byte 0,253,112,0
-		.byte 3,171,92,0  
-		.byte 14,170,255,0 
-		.byte 14,170,214,192  
-		.byte 50,170,190,192 
-		.byte 50,0,40,192 
-		.byte 50,3,204,192 
-		.byte 14,3,204,192 
-		.byte 14,0,0,192  
-		.byte 14,15,243,192 
-		.byte 3,0,12,0
-		.byte 0,255,240,0
-		.byte 0,0,0,0
-		.byte 0,0,0,0
-		
-		
-bottom	.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		.byte 255,255,255,255, 255,255,255,255, 255,255,255,255, 255,255,255,255
-		
-
-tileStart:
-		.byte 2
-		
-;number .byte 1
-;singlenum	.byte 1
-;hexnum .byte 1
-
-;keyboard .byte 1
 
 	.end
