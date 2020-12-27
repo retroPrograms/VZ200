@@ -4,38 +4,33 @@
 start:
 	;CALL 01C9h	;clear screen
 	call hires
-	ld de, 07000h ; 07125h
-	;call drawMount
-	ld de, 07002h
-	;call drawMount
-	ld de, 07100h
-	;call drawMount
-	ld de, 0701ah
-	;call drawMount
-	ld de, 0701ch
-	;call drawMount
-	ld de, 0701eh
-	;call drawMount
+	
 	call drawMap
 	call readkey
 	CALL 01C9h	;clear screen
 	ret
 	
 drawMap:
-	ld c, 14
-	ld ix, tileMap
-	ld d, 070h
 	
+	ld b, 8	; 8 lines
+	ld d, 070h
+mapLine:
+	ld c, 16 ; 16 tiles
+	ld ix, tileMap
 mapLoop:
 	ld e, (ix)
-	ld d, 070h
+	;ld d, 070h
 	push bc
+	push de
 	call drawMount
-	
+	pop de
 	pop bc
 	inc ix
 	dec c
 	jp nz, mapLoop
+	inc d
+	dec b
+	jp nz,mapLine
 	ret
 	
 drawMount: ;07000h - 077ffh
@@ -101,7 +96,7 @@ mountain:
 		
 tileMap:
 		.byte 000h, 002h, 004h, 006h, 008h, 00ah, 00ch, 00eh, 010h
-		.byte 012h, 014h, 012h, 014h, 016h, 018h, 01ah, 01ch
+		.byte 012h, 014h, 016h, 018h, 01ah, 01ch, 01eh
 		
 		
 
