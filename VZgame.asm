@@ -1,4 +1,4 @@
-;g2 start
+;g2 start  http://www.cpcalive.com/docs/TASMMAN.HTM assembler help
 .org 32256
 	
 start:
@@ -97,6 +97,9 @@ mountain:
 tileMap:
 		.byte 000h, 002h, 004h, 006h, 008h, 00ah, 00ch, 00eh, 010h
 		.byte 012h, 014h, 016h, 018h, 01ah, 01ch, 01eh
+		
+tileNums:
+		.FILL 128 ,0
 		
 		
 
