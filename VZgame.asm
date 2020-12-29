@@ -11,7 +11,7 @@ start:
 	ret
 	
 drawMap:
-	
+
 	ld b, 8	; 8 lines
 	ld d, 070h
 mapLine:
@@ -89,6 +89,18 @@ erase:
 	jp scan
 	
 mountain:
+		.byte 48,0,252,192
+	    .byte 3,240,15,252
+		.byte 51,255,252,0
+		.byte 63,12,0,63
+		
+forrest1:
+		.byte 48,0,252,192
+	    .byte 3,240,15,252
+		.byte 51,255,252,0
+		.byte 63,12,0,63
+		
+forrest2:
 		.byte 48,0,252,192
 	    .byte 3,240,15,252
 		.byte 51,255,252,0
