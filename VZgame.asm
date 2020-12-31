@@ -34,7 +34,7 @@ mapLoop:
 	ret
 	
 drawMount: ;07000h - 077ffh
-	ld hl, mountain
+	ld hl, forrest2
 	;ld de, 07000h
 	ld c,8
 mount_loop:
@@ -95,16 +95,16 @@ mountain:
 		.byte 63,12,0,63
 		
 forrest1:
-		.byte 48,0,252,192
-	    .byte 3,240,15,252
-		.byte 51,255,252,0
-		.byte 63,12,0,63
+		.byte 85,21,85,4
+	    .byte 20,21,0,85
+		.byte 21,84,85,69
+		.byte 21,64,65,81
 		
 forrest2:
-		.byte 48,0,252,192
-	    .byte 3,240,15,252
-		.byte 51,255,252,0
-		.byte 63,12,0,63
+		.byte 5,5,20,21
+	    .byte 21,84,1,85
+		.byte 16,84,84,80
+		.byte 81,21,20,84
 		
 tileMap:
 		.byte 000h, 002h, 004h, 006h, 008h, 00ah, 00ch, 00eh, 010h
