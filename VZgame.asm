@@ -5,7 +5,9 @@ start:
 	;CALL 01C9h	;clear screen
 	call hires
 	
-	call drawMap
+	;call drawMap
+	call drawForest
+	call drawForest2
 	call readkey
 	CALL 01C9h	;clear screen
 	ret
@@ -34,7 +36,7 @@ mapLoop:
 	ret
 	
 drawMount: ;07000h - 077ffh
-	ld hl, forrest2
+	ld hl, forest2
 	;ld de, 07000h
 	ld c,8
 mount_loop:
@@ -55,6 +57,54 @@ mount_loop:
 	dec c
 	jp nz, mount_loop
 	ret
+	
+drawForest: ;07000h - 077ffh  ;temp for tile testing
+	ld hl, forest1
+	ld de, 07000h
+	ld c,8
+mount_loop1:
+	ld a, (hl)
+	ld (de), a
+	
+	inc hl
+	inc de
+	ld a, (hl)
+	ld (de), a
+	inc hl
+	inc de
+	push hl
+	ld hl,30
+	add hl, de
+	ex de, hl
+	pop hl
+	dec c
+	jp nz, mount_loop1
+	ret
+	
+drawForest2: ;07000h - 077ffh ;temp for tile testing
+	ld hl, forest2
+	ld de, 07002h
+	ld c,8
+mount_loop2:
+	ld a, (hl)
+	ld (de), a
+	
+	inc hl
+	inc de
+	ld a, (hl)
+	ld (de), a
+	inc hl
+	inc de
+	push hl
+	ld hl,30
+	add hl, de
+	ex de, hl
+	pop hl
+	dec c
+	jp nz, mount_loop2
+	ret
+	
+
 	
 
 
@@ -94,13 +144,13 @@ mountain:
 		.byte 51,255,252,0
 		.byte 63,12,0,63
 		
-forrest1:
+forest1:
 		.byte 85,21,85,4
 	    .byte 20,21,0,85
 		.byte 21,84,85,69
 		.byte 21,64,65,81
 		
-forrest2:
+forest2:
 		.byte 5,5,20,21
 	    .byte 21,84,1,85
 		.byte 16,84,84,80
