@@ -5,19 +5,22 @@ start:
 	;CALL 01C9h	;clear screen
 	call hires
 	
-	;call drawMap
-	call drawForest
-	call drawForest2
+	
+	call drawMap
+	;call drawForest
+	;call drawForest2
 	call readkey
 	CALL 01C9h	;clear screen
 	ret
+
 	
 drawMap:
-
+	ld iy,screenMap
 	ld b, 8	; 8 lines
 	ld d, 070h
 mapLine:
 	ld c, 16 ; 16 tiles
+	ld a,(iy)   ;read screenMap
 	ld ix, tileMap
 mapLoop:
 	ld e, (ix)
