@@ -13,8 +13,20 @@ start:
 	CALL 01C9h	;clear screen
 	ret
 
-	
 drawMap:
+	ld iy,screenMap
+	ld c,128
+	ld d,070h
+	ld ix,tileMap
+drawMapLoop:
+	ld e,(ix)
+	ld a,(iy)
+	
+	ret
+
+
+	
+drawMap1:
 	ld iy,screenMap
 	ld b, 8	; 8 lines
 	ld d, 070h
@@ -158,6 +170,12 @@ forest2:
 	    .byte 21,84,1,85
 		.byte 16,84,84,80
 		.byte 81,21,20,84
+		
+green:
+		.byte 0,0,0,0
+	    .byte 0,0,0,0
+		.byte 0,0,0,0
+		.byte 0,0,0,0
 		
 tileMap:
 		.byte 000h, 002h, 004h, 006h, 008h, 00ah, 00ch, 00eh, 010h
