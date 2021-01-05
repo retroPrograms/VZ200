@@ -15,6 +15,7 @@ start:
 
 drawMap:
 	ld iy,screenMap
+	ld b,16
 	ld c,128
 	ld d,070h
 	ld ix,tileMap
@@ -22,7 +23,19 @@ drawMapLoop:
 	ld e,(ix)
 	ld a,(iy)
 	
+	dec b
+	jp z,nextLine
+draw_ret:
+	dec c
+	jp nz, drawMapLoop
+	
+	
 	ret
+	
+nextLine:
+	ld b,17
+	inc d
+	jp draw_ret
 
 
 	
