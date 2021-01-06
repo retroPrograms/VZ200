@@ -22,14 +22,17 @@ drawMap:
 drawMapLoop:
 	ld e,(ix)
 	ld a,(iy)
-	
+	push bc
+	push de
+	;ld hl,forest1
+	;call drawMount
+	pop de
+	pop bc
 	dec b
 	jp z,nextLine
 draw_ret:
 	dec c
 	jp nz, drawMapLoop
-	
-	
 	ret
 	
 nextLine:
@@ -64,7 +67,7 @@ mapLoop:
 	ret
 	
 drawMount: ;07000h - 077ffh
-	ld hl, forest2
+	;ld hl, forest2
 	;ld de, 07000h
 	ld c,8
 mount_loop:
