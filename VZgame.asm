@@ -24,19 +24,20 @@ drawMapLoop:
 	ld a,(iy)
 	push bc
 	push de
-	;ld hl,forest1
-	;call drawMount
+	ld hl,forest1
+	call drawForest
 	pop de
 	pop bc
+	inc ix
 	dec b
-	jp z,nextLine
+	jp z,nextLineD
 draw_ret:
 	dec c
 	jp nz, drawMapLoop
 	ret
 	
-nextLine:
-	ld b,17
+nextLineD:
+	ld b,16
 	inc d
 	jp draw_ret
 
@@ -90,8 +91,8 @@ mount_loop:
 	ret
 	
 drawForest: ;07000h - 077ffh  ;temp for tile testing
-	ld hl, forest1
-	ld de, 07000h
+	;ld hl, forest1
+	;ld de, 07000h
 	ld c,8
 mount_loop1:
 	ld a, (hl)
