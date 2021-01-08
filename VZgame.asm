@@ -14,9 +14,9 @@ start:
 	ret
 
 drawMap:
-	ld iy,screenMap
+	;ld iy,screenMap
 	ld b,16
-	ld c,128
+	ld c,128    ;128
 	ld d,070h
 	ld ix,tileMap
 drawMapLoop:
@@ -24,8 +24,11 @@ drawMapLoop:
 	ld a,(iy)
 	push bc
 	push de
+	push ix
 	ld hl,forest1
+	
 	call drawForest
+	pop ix
 	pop de
 	pop bc
 	inc ix
@@ -38,6 +41,7 @@ draw_ret:
 	
 nextLineD:
 	ld b,16
+	ld ix,tileMap
 	inc d
 	jp draw_ret
 
