@@ -1,168 +1,19 @@
 ;g2 start  http://www.cpcalive.com/docs/TASMMAN.HTM assembler help
 .org 32256
-	
+
+;#include "drawMap.asm"	
 start:
-	;CALL 01C9h	;clear screen
+	
 	call hires
 	
 	
 	call drawMap
-	;call drawForest
-	;call drawForest2
+	
 	call readkey
 	CALL 01C9h	;clear screen
 	ret
 
-drawMap:
-	ld iy,screenMap
-	ld b,16
-	ld c,128    ;128
-	ld d,070h
-	ld ix,tileMap
-drawMapLoop:
-	ld e,(ix)
-	ld a,(iy)
-	call tileSelect
-	push bc
-	push de
-	push ix
-	;ld hl,forest1
-	
-	call drawForest
-	pop ix
-	pop de
-	pop bc
-	inc ix
-	inc iy
-	dec b
-	jp z,nextLineD
-draw_ret:
-	dec c
-	jp nz, drawMapLoop
-	ret
-	
-tileSelect:
-	cp 1
-	jp nz, ts_next1
-	ld hl, mountain
-	ret
-ts_next1:
-	cp 2
-	jp nz, ts_next2
-	ld hl, forest1
-	ret
-ts_next2:
-	cp 3
-	jp nz, ts_next3
-	ld hl, forest2
-	ret
-ts_next3:
-	ld hl,green
-	ret
-	
-	
-nextLineD:
-	ld b,16
-	ld ix,tileMap
-	inc d
-	jp draw_ret
-
-
-	
-drawMap1:
-	ld iy,screenMap
-	ld b, 8	; 8 lines
-	ld d, 070h
-mapLine:
-	ld c, 16 ; 16 tiles
-	ld a,(iy)   ;read screenMap
-	ld ix, tileMap
-mapLoop:
-	ld e, (ix)
-	;ld d, 070h
-	push bc
-	push de
-	call drawMount
-	pop de
-	pop bc
-	inc ix
-	dec c
-	jp nz, mapLoop
-	inc d
-	dec b
-	jp nz,mapLine
-	ret
-	
-drawMount: ;07000h - 077ffh
-	;ld hl, forest2
-	;ld de, 07000h
-	ld c,8
-mount_loop:
-	ld a, (hl)
-	ld (de), a
-	
-	inc hl
-	inc de
-	ld a, (hl)
-	ld (de), a
-	inc hl
-	inc de
-	push hl
-	ld hl,30
-	add hl, de
-	ex de, hl
-	pop hl
-	dec c
-	jp nz, mount_loop
-	ret
-	
-drawForest: ;07000h - 077ffh  ;temp for tile testing
-	;ld hl, forest1
-	;ld de, 07000h
-	ld c,8
-mount_loop1:
-	ld a, (hl)
-	ld (de), a
-	
-	inc hl
-	inc de
-	ld a, (hl)
-	ld (de), a
-	inc hl
-	inc de
-	push hl
-	ld hl,30
-	add hl, de
-	ex de, hl
-	pop hl
-	dec c
-	jp nz, mount_loop1
-	ret
-	
-drawForest2: ;07000h - 077ffh ;temp for tile testing
-	ld hl, forest2
-	ld de, 07002h
-	ld c,8
-mount_loop2:
-	ld a, (hl)
-	ld (de), a
-	
-	inc hl
-	inc de
-	ld a, (hl)
-	ld (de), a
-	inc hl
-	inc de
-	push hl
-	ld hl,30
-	add hl, de
-	ex de, hl
-	pop hl
-	dec c
-	jp nz, mount_loop2
-	ret
-	
-
+#include "drawMap.asm"	
 	
 
 
