@@ -41,6 +41,11 @@ ts_next2:
 	ld hl, forest2
 	ret
 ts_next3:
+	cp 4
+	jp nz, ts_next4
+	ld hl, house
+	ret
+ts_next4:
 	ld hl,green
 	ret
 	
