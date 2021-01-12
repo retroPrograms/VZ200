@@ -46,6 +46,11 @@ ts_next3:
 	ld hl, house
 	ret
 ts_next4:
+	cp 5
+	jp nz, ts_next5
+	ld hl,mainMountain
+	ret
+ts_next5:
 	ld hl,green
 	ret
 	
