@@ -51,6 +51,11 @@ ts_next4:
 	ld hl,mainMountain
 	ret
 ts_next5:
+	cp 6
+	jp nz, ts_next6
+	ld hl,river
+	ret
+ts_next6:
 	ld hl,green
 	ret
 	
