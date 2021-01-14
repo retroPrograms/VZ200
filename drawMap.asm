@@ -56,6 +56,16 @@ ts_next5:
 	ld hl,river
 	ret
 ts_next6:
+	cp 7
+	jp nz, ts_next7
+	ld hl,gate
+	ret
+ts_next7:
+	cp 8
+	jp nz, ts_next8
+	ld hl,wall
+	ret
+ts_next8:
 	ld hl,green
 	ret
 	
