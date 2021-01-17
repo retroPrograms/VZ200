@@ -8,6 +8,7 @@ start:
 	
 	
 	call drawMap
+	call drawHero
 	
 	call readkey
 	CALL 01C9h	;clear screen
@@ -47,6 +48,8 @@ erase:
 	
 	jp scan
 	
+
+	
 mountain:
 		.byte 48,0,252,192
 	    .byte 3,240,15,252
@@ -65,13 +68,13 @@ forest2:
 		.byte 16,84,84,80
 		.byte 81,21,20,84
 		
-green:
+hero:
 		.byte 5,64,4,64
 	    .byte 1,0,21,80
 		.byte 1,0,1,0
 		.byte 4,64,80,20
 		
-hero:
+green:
 		.byte 0,0,0,0
 	    .byte 0,0,0,0
 		.byte 0,0,0,0

@@ -80,7 +80,7 @@ nextLineD:
 
 	
 drawForest: ;07000h - 077ffh  ;temp for tile testing
-	;ld hl, forest1
+	;ld hl,hero
 	;ld de, 07000h
 	ld c,8
 mount_loop1:
@@ -100,4 +100,10 @@ mount_loop1:
 	pop hl
 	dec c
 	jp nz, mount_loop1
+	ret
+	
+drawHero:
+	ld hl, hero
+	ld de, 07000h
+	call drawForest
 	ret
