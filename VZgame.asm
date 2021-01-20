@@ -15,8 +15,52 @@ start:
 	ret
 
 #include "drawMap.asm"	
-	
 
+moveCave:
+	;ld hl, wall  ;test
+	;ld de, 07000h
+	call clearGraphs
+	;call drawForest
+	ret
+	
+moveHeroS:
+	ld hl,green  ;test
+	ld de, 07000h
+	call drawForest 
+	ret
+	
+moveHeroE:
+	ld hl, wall  ;test
+	ld de, 07000h
+	call drawForest
+	ret
+	
+moveHeroN:
+	ld hl, gate  ;test
+	ld de, 07000h
+	call drawForest
+	ret
+	
+moveHeroW:
+	ld hl,mountain ;test
+	ld de, 07000h
+	call drawForest
+	ret
+	
+clearGraphs:
+	;ld ix, 077ffh
+	;ld hl, 007ffh
+	ld hl, 077ffh
+cg_loop:
+	ld (hl),0
+	dec hl
+	ld a,077h
+	cp h
+	jp nz, cg_loop
+	ld a, 0ffh
+	cp l
+	jp nz, cg_loop
+	ret
 
 hires:
 		ld hl, 06800h
@@ -39,6 +83,16 @@ scan:  ;registers af, bc, de and hl
 	call 2ef4h
 	cp 84
 	jp z, erase
+	cp 65
+	call z, moveHeroW  ;A key
+	cp 87
+	call z, moveHeroN  ;W key
+	cp 90
+	call z, moveHeroS  ;Z key
+	cp 83
+	call z, moveHeroE  ;S key
+	cp 67
+	call z, moveCave   ;C key
 	cp 020h 
 	jr nz,scan
 	CALL 01C9h	;clear screen
@@ -116,6 +170,9 @@ tileMap:
 		
 tileNums:
 		.FILL 128 ,0
+		
+heroPos:
+		.byte 0
 		
 screenMap:
 		.byte 0,0,0,0 ,1,1,1,2, 3,1,6,1, 8,0,0,0
