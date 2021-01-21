@@ -107,3 +107,16 @@ drawHero:
 	ld de, 07000h
 	call drawForest
 	ret
+	
+clearGraphs:	
+	ld hl, 077ffh
+cg_loop:
+	ld (hl),0
+	dec hl
+	ld a,06fh ;06ffh 
+	cp h
+	jp nz, cg_loop
+	ld a, 0ffh
+	cp l
+	jp nz, cg_loop
+	ret

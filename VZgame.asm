@@ -47,20 +47,7 @@ moveHeroW:
 	call drawForest
 	ret
 	
-clearGraphs:
-	;ld ix, 077ffh
-	;ld hl, 007ffh
-	ld hl, 077ffh
-cg_loop:
-	ld (hl),0
-	dec hl
-	ld a,077h
-	cp h
-	jp nz, cg_loop
-	ld a, 0ffh
-	cp l
-	jp nz, cg_loop
-	ret
+
 
 hires:
 		ld hl, 06800h
