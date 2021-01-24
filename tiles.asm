@@ -83,6 +83,35 @@ screenMap:
 		.byte 0,1,2,3 ,6,1,2,3, 2,3,2,3, 8,0,0,5
 		.byte 1,1,2,3 ,2,6,2,3, 2,3,2,3, 8,0,0,0
 		
+		
+;cave tiles
+
+cavern1:				;top left
+		.byte 0,16,0,64
+	    .byte 1,0,4,0
+		.byte 16,0,64,0
+		.byte 0,0,0,0
+		
+cavern2:				;top right
+		.byte 0,0,0,0
+	    .byte 0,0,0,0
+		.byte 0,0,0,0
+		.byte 0,0,0,0
+		
+cavern3:				;bottom left
+		.byte 0,0,0,0
+	    .byte 0,0,0,0
+		.byte 0,0,0,0
+		.byte 0,0,0,0
+		
+cavern4:				;bottom right
+		.byte 0,0,0,0
+	    .byte 0,0,0,0
+		.byte 0,0,0,0
+		.byte 0,0,0,0
+		
+
+		
 caveMap:
 		.byte 0,0,0,0 ,0,0,0,0, 0,0,0,0, 0,0,0,0
 		.byte 0,0,0,0 ,0,0,0,0, 0,0,0,0, 0,0,0,0
