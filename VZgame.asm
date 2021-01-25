@@ -21,7 +21,10 @@ moveCave:
 	;ld hl, wall  ;test
 	;ld de, 07000h
 	call clearGraphs
-	;call drawForest
+	ld hl, cavern1 ;test
+	ld de, 07000h
+	call drawForest
+	
 	ret
 	
 moveHeroS:
