@@ -10,8 +10,21 @@
 		LD HL,headingMesg 
 		call 2B75h ;display mesg string
 		
+		call keyScan
 		
 		
+		
+		ret
+		
+keyScan:
+		LD HL,pressSpace
+		call 2B75h ;display mesg string
+scan:		
+		call 02ef4h ;scan keyboard once
+		or a		;any key pressed
+		jr z,scan	;rescan if not
+		cp ' '
+		jr nz,scan
 		ret
 		
 headingMesg:
@@ -19,6 +32,8 @@ headingMesg:
 		.byte 0dh
 		.byte 0dh
 		.byte 00h 	
-		
-		
+
+pressSpace:
+		.byte "PRESS SPACE KEY"	
+		.byte 00h 	
 .end
